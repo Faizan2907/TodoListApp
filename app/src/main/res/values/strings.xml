@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TodoApp</string>
+    <string name="todoapp">To Do App</string>
+    <string name="todotasks">To Do Tasks</string>
+    <string name="task1">This is task 1</string>
+    <string name="hint">Enter new task</string>
+    <string name="save">Save</string>
+</resources>
