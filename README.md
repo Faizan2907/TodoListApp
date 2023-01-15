@@ -1,4 +1,4 @@
-JAVA and SQLITE based To Do List App.
+JAVA and SQLITE based To Do List App
 
 # 1 Splash Screen #
 <img width="50%" hight = "50%" src="https://user-images.githubusercontent.com/67515374/212554392-c5cec6cf-4ff5-4b22-93ef-7b75bfbbf09c.jpg">
