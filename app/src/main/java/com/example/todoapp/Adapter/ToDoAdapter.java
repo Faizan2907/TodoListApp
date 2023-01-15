@@ -19,18 +19,17 @@ import com.example.todoapp.Utils.DataBaseHelper;
 
 import java.util.List;
 
+//Adapter is an interface between UI and the source code
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> {
 
     private List<ToDoModel> mList;
     private MainActivity activity;
     private DataBaseHelper myDB;
 
-
     public ToDoAdapter(DataBaseHelper myDB, MainActivity activity){
         this.activity = activity;
         this.myDB = myDB;
     }
-
 
     @NonNull
     @Override
@@ -49,9 +48,9 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    myDB.updateStatus(item.getId(), String.valueOf(1));
+                    myDB.updateStatus(item.getId(), 1);
                 }else{
-                    myDB.updateStatus(item.getId(), String.valueOf(0));
+                    myDB.updateStatus(item.getId(), 2);
                 }
             }
         });
@@ -82,7 +81,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.MyViewHolder> 
 
         Bundle bundle = new Bundle();
         bundle.putInt("id", item.getId());
-        bundle.putString("task", item.toString());
+        bundle.putString("task", item.getTask());
 
         AddNewTask task = new AddNewTask();
         task.setArguments(bundle);

@@ -32,12 +32,12 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, TASK TEXT, STATUS INTEGER)");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
@@ -57,7 +57,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, values, "ID=?", new String[]{String.valueOf(id)});
     }
 
-    public void updateStatus(int id, String status){
+    public void updateStatus(int id, int status){
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COL_3, status);
@@ -69,23 +69,28 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_NAME, "ID=?", new String[]{String.valueOf(id)});
     }
 
+    //All task will shown here
+    // We will fetch the data in the form of cursor as usual
+
     @SuppressLint("Range")
     public List<ToDoModel> getAllTask(){
+
         db = this.getWritableDatabase();
         Cursor cursor = null;
         List<ToDoModel> modelList = new ArrayList<>();
 
         db.beginTransaction();
-        try{
-            cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
-            if(cursor != null){
-                if(cursor.moveToFirst()){
+        try {
+            cursor = db.query(TABLE_NAME , null , null , null , null , null , null);
+            if (cursor != null){
+                if (cursor.moveToFirst()){
                     do {
                         ToDoModel task = new ToDoModel();
                         task.setId(cursor.getInt(cursor.getColumnIndex(COL_1)));
                         task.setTask(cursor.getString(cursor.getColumnIndex(COL_2)));
                         task.setStatus(cursor.getInt(cursor.getColumnIndex(COL_3)));
                         modelList.add(task);
+
                     }while (cursor.moveToNext());
                 }
             }
@@ -93,7 +98,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             db.endTransaction();
             cursor.close();
         }
-
         return modelList;
     }
 

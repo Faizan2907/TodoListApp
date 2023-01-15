@@ -6,7 +6,7 @@
     <EditText
         android:id="@+id/edittext"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:autofillHints=""
         android:hint="@string/hint"
         android:inputType="text"
@@ -16,13 +16,14 @@
 
     <Button
         android:id="@+id/button_save"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:layout_below="@id/edittext"
         android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:text="@string/save"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="15sp" />
 </RelativeLayout>

@@ -1,5 +1,8 @@
 package com.example.todoapp;
 
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,17 +15,22 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.todoapp.Model.ToDoModel;
 import com.example.todoapp.Utils.DataBaseHelper;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class AddNewTask extends BottomSheetDialogFragment {
-    private static final String TAG = "AddNewTask";
+    public static final String TAG = "AddNewTask";
 
     //widgets
     private EditText mEditText;
     private Button mSaveButton;
 
     private DataBaseHelper myDB;
+
+    public static AddNewTask newInstance(){
+        return new AddNewTask();
+    }
 
     @Nullable
     @Override
@@ -61,13 +69,48 @@ public class AddNewTask extends BottomSheetDialogFragment {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (charSequence.toString().equals("")){
+                    mSaveButton.setEnabled(false);
+                    mSaveButton.setBackgroundColor(Color.GRAY);
+                }
+                else{
+                    mSaveButton.setEnabled(true);
+                    mSaveButton.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
+
+        final boolean finalIsUpdated = isUpdate;
+
+        mSaveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = mEditText.getText().toString();
+
+                if(finalIsUpdated){
+                    myDB.updateTask(bundle.getInt("id"), text);
+                }
+                else{
+                    ToDoModel item = new ToDoModel();
+                    item.setTask(text);
+                    item.setStatus(0);
+                    myDB.insertTask(item);
+                }
+                dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        Activity activity = getActivity();
+        if(activity instanceof OnDialogCloseListener){
+            ((OnDialogCloseListener)activity).onDialogClose(dialog);
+        }
     }
 }
