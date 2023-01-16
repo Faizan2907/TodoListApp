@@ -12,7 +12,7 @@ JAVA and SQLITE based To Do List App
 # 4 Swipte right to edit #
 <img width="50%" hight = "50%" src="https://user-images.githubusercontent.com/67515374/212554549-9f613343-e2fb-4cf4-b434-754473d9ce11.jpg">
 
-# 5 Swipte left to delete #
+# 5 Swipe left to delete #
 <img width="50%" hight = "50%" src="https://user-images.githubusercontent.com/67515374/212554592-20af3ba7-e14a-4f14-9bc0-26e87b1af8ca.jpg">
 
 # 6 Once you've finished the task, click the checkmark #
